@@ -11,7 +11,7 @@
   <link href="//lib.baomitu.com/admin-lte/2.3.11/css/skins/_all-skins.min.css" rel="stylesheet">
   <link href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//lib.baomitu.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/vendor/noty/noty.css">
+  <link rel="stylesheet" href="/public/plugin/noty/noty.css">
   <style>
     body { background-color: #ecf0f5; }
   </style>
@@ -23,7 +23,7 @@
 <script src="//lib.baomitu.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="//lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//lib.baomitu.com/admin-lte/2.3.11/js/app.min.js"></script>
-<script src="/assets/vendor/noty/noty.js"></script>
+<script src="/public/plugin/noty/noty.js"></script>
 <script>
 /**
  * 全局通知工具

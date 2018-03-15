@@ -1,0 +1,60 @@
+blockquote,body,button,dd,dl,dt,fieldset,h1,h2,h3,h4,h5,h6,hr,input,legend,li,ol,p,pre,td,textarea,th,ul {
+  margin: 0;
+  padding: 0
+}
+
+body,button,input,select,textarea {
+  font: 12px/1 PingFangSC-Regular,Microsoft YaHei,"\5b8b\4f53",Tahoma,Helvetica,Arial,sans-serif
+}
+
+ol,ul {
+  list-style: none
+}
+
+a {
+  text-decoration: none;
+  outline: none
+}
+
+a:hover {
+  text-decoration: underline
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+hr {
+  border: none;
+  height: 1px
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 400
+}
+
+em {
+  font-style: normal
+}
+
+html {
+  overflow-y: scroll
+}
+
+fieldset,img {
+  border: none;
+  vertical-align: top
+}
+
+.clear-fix {
+  *zoom:1}
+
+.clear-fix:after,.clear-fix:before {
+  display: table;
+  content: ""
+}
+
+.clear-fix:after {
+  clear: both
+}

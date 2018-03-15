@@ -1,0 +1,343 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: #1E1E3A;
+}
+
+/*未打卡标识颜色*/
+.no-clock {
+  background-color: #3BB152;
+}
+
+/*迟到标识颜色*/
+.late {
+  background-color: #F9AC21;
+}
+
+/*旷工标识颜色*/
+.absent {
+  background-color: #F95979;
+}
+
+/*工作日加班标识颜色*/
+.overtime {
+  background-color: #4283FF;
+}
+
+/*节假日加班颜色*/
+.overtime-holiday {
+  background-color: #4283FF;
+}
+
+/*请假标识颜色*/
+.leave {
+  background-color: #A560E8;
+}
+
+/* 异常 标识颜色 */
+.aberrant {
+  background-color: #F95979;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+color: #5E6186;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+color: #5E6186;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+color: #5E6186;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+color: #5E6186;
+}
+
+.record-main {
+  height: 100%;
+}
+
+.record-main .left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 220px;
+  background: #292949;
+}
+
+.record-main .left-menu .date-box {
+  height: 138px;
+  font-size: 22px;
+  font-size: 14px;
+  color: #8889B0;
+}
+
+.record-main .left-menu .date-box .date {
+  flex-basis: 118px;
+  text-align: center;
+}
+
+.record-main .left-menu .date-box .date .month {
+  margin-right: 2px;
+}
+
+.record-main .left-menu .date-box .date .year {
+  margin-left: 2px;
+}
+
+.left-menu .date-box .date-left-right {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.left-menu .search-box {
+  padding: 10px 0 10px 12px;
+  height: 22px;
+  background-color: #36385C;
+  margin-bottom: 15px;
+}
+
+.left-menu .search-box .search-ipt {
+  height: 22px;
+  width: 180px;
+  font-size: 14px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.left-menu .search-box .search {
+  font-size: 16px;
+  vertical-align: middle;
+  color: #8889B0;
+  text-decoration: none;
+}
+
+.left-menu .menu-list li {
+  cursor: pointer;
+}
+
+.left-menu .menu-list li .line:hover {
+  background-color: #36385C;
+}
+
+.left-menu .menu-list li .line.on {
+  background-color: #36385C;
+}
+
+.left-menu .menu-list li .line.on .line-icon {
+  border-left-color: #377BFF;
+}
+
+.left-menu .menu-list li.showchild .child-menu {
+  display: block;
+}
+
+.left-menu .menu-list li .child-menu {
+  display: none;
+}
+
+.left-menu .menu-list .line {
+  height: 42px;
+  color: #8889B0;
+  font-size: 14px;
+  position: relative;
+}
+
+.left-menu .menu-list .line .line-icon {
+  width: 54px;
+  height: 42px;
+  border-left: 4px solid transparent;
+}
+
+.left-menu .menu-list .line .right-icon {
+  font-size: 12px;
+  color: #8889B0;
+
+}
+
+.left-menu .menu-list .line .line-icon .oa-icon.icon-youxishiyebu {
+  font-size: 14px;
+}
+
+.left-menu .menu-list .line .line-icon .oa-icon.icon-chanpinbu {
+  font-size: 18px;
+}
+
+.left-menu .menu-list .line .arrow {
+  display: inline-block;
+  width: 7px;
+  height: 5px;
+  position: absolute;
+  top: 17px;
+  right: 14px;
+}
+
+.left-menu .menu-list .line .arrow {
+  background: url(/assets/img/arrow-down.png) no-repeat 0 0;
+}
+
+.left-menu .menu-list .line .arrow.up {
+  background: url(/assets/img/arrow-up.png) no-repeat 0 0;
+}
+
+.record-main .right-main {
+  margin-left: 220px;
+  padding: 40px 19px 0 19px;
+}
+
+.right-main .each-calendar {
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #292949;
+  margin-bottom: 60px;
+}
+
+.each-calendar .info-aggre {
+  height: 50px;
+  background-color: #36385C;
+}
+
+.each-calendar .info-aggre .name {
+  font-size: 18px;
+  color: #fff;
+}
+
+.each-calendar .info-aggre .kq-info {
+  font-size: 14px;
+  color: #8889B0;
+  position: relative;
+}
+
+.each-calendar .info-aggre .kq-info > em {
+  color: #fff;
+  margin: 0 5px;
+}
+
+.each-calendar .info-aggre .kq-info .point {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  vertical-align: middle;
+  margin-bottom: 2px;
+  border-radius: 50%;
+}
+
+.each-calendar .info-aggre .kq-info:hover .tips-box {
+  display: block;
+}
+
+/*提示外层盒子便于让提示内容宽度自适应*/
+.each-calendar .info-aggre .kq-info .tips-box {
+  display: none;
+  line-height: 30px;
+  width: 300px;
+  position: absolute;
+  top: 25px;
+  left: 0px;
+}
+
+.each-calendar .info-aggre .kq-info .tips {
+  display: inline-block;
+  line-height: 30px;
+  padding: 0 8px;
+  color: #292949;
+  background-color: #fff;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.each-calendar .info-aggre .kq-info .tips > em {
+  margin: 0 3px;
+}
+
+.each-calendar .calendar-area {
+  padding: 0 2.7%;
+}
+
+.each-calendar .calendar-area .calendar-title {
+  display: flex;
+  height: 50px;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 14px;
+  color: #fff;
+}
+
+.each-calendar .calendar-area .calendar-title li {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.each-calendar .calendar-area .calendar-title li.week {
+  opacity: 0.5;
+}
+
+.each-calendar .calendar-content {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.each-calendar .calendar-content li {
+  flex: 0 0 14.28%;
+  height: 80px;
+  box-sizing: border-box;
+  border: 1px solid #3E406B;
+  margin: 0 0 -1px -1px;
+}
+
+.each-calendar .calendar-content li.empty {
+  border: none;
+}
+
+.each-calendar .calendar-content li .info {
+  height: 45px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.each-calendar .calendar-content li .info .num {
+  font-family: dinmedium;
+  flex: 0 0 30px;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+}
+
+.each-calendar .calendar-content li.week .info .num {
+  opacity: 0.5;
+}
+
+.each-calendar .calendar-content li .info .tab {
+  display: inline-block;
+  line-height: 22px;
+  padding: 0 5px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.each-calendar .calendar-content li .date {
+  font-family: dinregular;
+  font-size: 20px;
+  color: #8889B0;
+  padding: 0 0 0 10px;
+}
+
+.each-calendar .calendar-content li .date .start,
+.each-calendar .calendar-content li .date .end {
+  display: inline-block;
+  width: 50px;
+}

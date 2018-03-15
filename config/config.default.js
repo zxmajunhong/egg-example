@@ -15,5 +15,13 @@ module.exports = appInfo => {
     defaultExtension: '.njs', // 配置在渲染模版时默认查找的文件后缀名是.nj
   };
 
+  // 配置mongodb
+  config.mongoose = {
+    client: {
+      url: 'mongodb://192.168.11.13:27017/tm-oa',
+      options: {},
+    },
+  };
+
   return config;
 };

@@ -7,15 +7,17 @@
 const Controller = require('../core/base_controller');
 
 class HomeController extends Controller {
-  index() {
-    this.renderHtml('index.njs', {
+  // 框架展示
+  async index() {
+    await this.ctx.render('index.njs', {
       user: {
         user_name: 'admin',
       },
     });
   }
-  home() {
-    this.renderHtml('home.njs');
+  // 首页展示
+  async home() {
+    await this.ctx.render('home.njs');
   }
 }
 

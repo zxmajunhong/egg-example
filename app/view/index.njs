@@ -1,4 +1,4 @@
-{% extends layout/base.njs" %}
+{% extends "layout/base.njs" %}
 
 {% block head %}
 <style>

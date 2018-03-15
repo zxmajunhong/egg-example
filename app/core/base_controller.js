@@ -13,7 +13,6 @@ class BaseController extends Controller {
    * @memberof BaseController
    */
   async renderHtml(viewPath, viewData) {
-    console.log('path', viewPath);
     await this.ctx.render(viewPath, viewData);
   }
 }

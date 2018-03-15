@@ -1,0 +1,36 @@
+@font-face {
+  font-family: dinmedium;
+  src: url(iconfont/DIN-Medium.otf);
+}
+
+@font-face {
+  font-family: dinregular;
+  src: url(iconfont/DIN-Regular.otf);
+}
+
+.width-1180 {
+  width: 1180px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-left-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-around-center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
