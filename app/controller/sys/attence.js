@@ -3,7 +3,10 @@
  * 考勤相关的控制器
  */
 
-const Controller = require('../../core/base_controller');
+const sendToWormhole = require('stream-wormhole');
+const Controller = require('../../core/baseController');
+const toArray = require('stream-to-array');
+const xlsx = require('node-xlsx');
 
 // 部门
 const departments = [
@@ -15,7 +18,7 @@ const departments = [
   {
     name: '研发部',
     icon: 'yanfabu',
-    children: ['前端部', '后端部', '运维部', '移动端', '游戏开发'],
+    children: [ '前端部', '后端部', '运维部', '移动端', '游戏开发' ],
   },
   { name: '用户体验部', icon: 'yonghutiyanbu' },
   { name: '运营部', icon: 'yunyingbu' },
@@ -34,6 +37,54 @@ function getCookieUser(ctx) {
     return a;
   }
   return ctx.cookies.get('user');
+}
+
+/**
+ * 解析上传的excel文件 考勤数据通过excel上传
+ *
+ * @param {any} file 上传的文件信息 Buffer
+ * @return {any} 考勤数据
+ */
+function parseXlsx(file) {
+  const attences = {}; // 当月所有考勤记录
+
+  if (!file) {
+    return attences;
+  }
+
+  const res = xlsx.parse(file); // 解析数据
+  const list = res[0].data; // 第一张工作表数据
+
+  list.shift(); // 移除表头
+
+  list.forEach(it => {
+    // 不打卡人员不用统计
+    if (it[5] === '不打卡' || it[5] === '总经办' || it.length === 0) {
+      return false;
+    }
+
+    // ["考勤号码","姓名","日期","签到时间","签退时间","部门"]
+    const [ number, name, orgDate, start, end, department ] = it;
+    const date = orgDate.replace(/\//g, '-'); // 日期格式转成 yyyy-M-d
+    const month = date.replace(/-\d+$/, ''); // 月份 yyyy-M
+    const key = `${number}:${month}`; // 工号+月份，防止跨月数据覆盖bug
+
+    if (attences[key]) {
+      attences[key].list.push({ date, start, end });
+    } else {
+      attences[key] = {
+        number, // 工号
+        name, // 姓名
+        department, // 部门
+        month, // 月份
+        list: [{ date, start, end }], // 考勤记录
+      };
+    }
+
+    return true;
+  });
+
+  return attences;
 }
 
 class AttenceController extends Controller {
@@ -80,23 +131,22 @@ class AttenceController extends Controller {
       query.date = conditions.month.replace(/\b\d\b/g, '0$&'); // 补零
     }
 
-    console.log('model', this.ctx.model);
     // 考勤数据
-    const list = await this.ctx.model.Attence.find(conditions, { _id: 0 }).sort({ number: 1 });
+    const list = await this.ctx.model.AttenceModel.find(conditions, { _id: 0 }).sort({ number: 1 });
 
     // 如果没有数据，就跳到上一个月
     if (list.length === 0 && (!hasQuery || (!hasQueryDate && query.user))) {
       // 如果是一月份那么跳到上一年的12月份
       if (dt.getMonth() === 0) {
-        return this.app.router.redirect(`/attence?date=${dt.getFullYear() - 1}-12`);
+        return this.ctx.redirect(`/attence?date=${dt.getFullYear() - 1}-12`);
       }
-      return this.app.router.redirect(`/attence?date=${dt.getFullYear()}-${dt.getMonth()}`);
+      return this.ctx.redirect(`/attence?date=${dt.getFullYear()}-${dt.getMonth()}`);
     }
 
     // 本月所有假期数据
     const holidays = {};
 
-    const res = await this.ctx.model('Holiday').find({
+    const res = await this.ctx.model.HolidayModel.find({
       date: {
         $gte: new Date(queryDate.getFullYear(), queryDate.getMonth(), 1),
         $lt: new Date(queryDate.getFullYear(), queryDate.getMonth() + 1, 1),
@@ -118,6 +168,46 @@ class AttenceController extends Controller {
       holidays: JSON.stringify(holidays), // 假期信息
       dataList: JSON.stringify(list),
     });
+  }
+  // 考勤的设置相关页面
+  async setting() {
+    await this.ctx.render('attence/setting');
+  }
+  // 上传文件 (导入考勤数据)
+  async upload() {
+    // 获取上传的文件流
+    const ctx = this.ctx;
+    const stream = await ctx.getFileStream();
+    try {
+      const parts = await toArray(stream);
+      const buf = Buffer.concat(parts);
+      const uploadData = parseXlsx(buf); // 解析 xlsx 文件
+
+      // 异步任务
+      const tasks = Object.keys(uploadData).map(i => {
+        const data = uploadData[i];
+        const { number, month } = data; // 更新条件
+        return ctx.model.AttenceModel.update({ number, month }, data, { upsert: true }); // 更新，不存在则插入
+      });
+
+      await Promise.all(tasks);
+      this.success('插入成功');
+    } catch (err) {
+      // 抛出异常的情况下需要将上传的文件流消费掉，要不然浏览器响应卡死
+      await sendToWormhole(stream);
+      this.fail(err.message);
+    }
+  }
+  // 删除指定用户记录
+  async delRecord() {
+    const ctx = this.ctx;
+    const { names } = ctx.request.body;
+    try {
+      await ctx.model.AttenceModel.remove({ name: { $in: names.split(',') } });
+      this.success('删除成功');
+    } catch (err) {
+      this.fail(err.message);
+    }
   }
 }
 

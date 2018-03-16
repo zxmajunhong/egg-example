@@ -56,7 +56,7 @@
       <ul class="sidebar-menu">
         <li class="header">主导航</li>
         <li class="active treeview">
-          <a class="J_menu" target="main-page" href="/">
+          <a class="J_menu" target="main-page" href="/home">
             <i class="fa fa-home"></i><span>首页</span>
           </a>
         </li>
@@ -68,7 +68,7 @@
           </a>
           <ul class="treeview-menu">
             <li>
-              <a target="main-page" href="/admin/attence">
+              <a target="main-page" href="/attence/setting">
                 <i class="fa fa-calendar"></i> <span>考勤管理</span>
               </a>
             </li>

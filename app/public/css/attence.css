@@ -178,11 +178,11 @@ color: #5E6186;
 }
 
 .left-menu .menu-list .line .arrow {
-  background: url(/assets/img/arrow-down.png) no-repeat 0 0;
+  background: url(/public/img/arrow-down.png) no-repeat 0 0;
 }
 
 .left-menu .menu-list .line .arrow.up {
-  background: url(/assets/img/arrow-up.png) no-repeat 0 0;
+  background: url(/public/img/arrow-up.png) no-repeat 0 0;
 }
 
 .record-main .right-main {

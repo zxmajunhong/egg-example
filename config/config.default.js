@@ -18,8 +18,41 @@ module.exports = appInfo => {
   // 配置mongodb
   config.mongoose = {
     client: {
-      url: 'mongodb://192.168.11.13:27017/tm-oa',
+      url: 'mongodb://192.168.11.13:27017/tm-oa-dev',
       options: {},
+    },
+  };
+
+  // 配置mysql连接信息
+  config.mysql = {
+    client: {
+      host: '192.168.11.13',
+      port: '3306',
+      user: 'root',
+      password: '123456',
+      database: 'tm_oa',
+    },
+    app: true, // 是否加载到app上，默认开启。开启后可以通过app.mysql.query(sql, values) 直接执行sql语句
+  };
+
+  // 增加对.xls的excel文件上传支持
+  config.multipart = {
+    fileExtensions: [ '.xls' ],
+  };
+
+  // 关闭csrf安全验证
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
+  // 配置中间件
+  config.middleware = [ 'auth' ];
+  config.auth = {
+    ignore(ctx) {
+      // 静态资源目录的访问/public 和post请求不做登录判断
+      return /^\/public/.test(ctx.url) || ctx.method === 'POST';
     },
   };
 

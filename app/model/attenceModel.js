@@ -6,7 +6,7 @@
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
-  const Attence = new Schema({
+  const AttenceSchema = new Schema({
     name: { type: String }, // 姓名
     number: { type: Number }, // 工号
     department: { type: String }, // 部门
@@ -23,10 +23,10 @@ module.exports = app => {
       },
     ],
   });
-  Attence.index({ month: 1, name: 1 });
-  Attence.index({ month: 1, number: 1 });
-  Attence.index({ month: 1, department: 1 });
-  Attence.index({ create_at: -1 });
+  AttenceSchema.index({ month: 1, name: 1 });
+  AttenceSchema.index({ month: 1, number: 1 });
+  AttenceSchema.index({ month: 1, department: 1 });
+  AttenceSchema.index({ create_at: -1 });
 
-  return mongoose.model('Attence', Attence);
+  return mongoose.model('Attence', AttenceSchema);
 };
