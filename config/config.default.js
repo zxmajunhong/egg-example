@@ -37,7 +37,7 @@ module.exports = appInfo => {
 
   // 增加对.xls的excel文件上传支持
   config.multipart = {
-    fileExtensions: [ '.xls' ],
+    fileExtensions: [ '.xls', '.ppt', '.txt' ],
   };
 
   // 关闭csrf安全验证
@@ -52,7 +52,8 @@ module.exports = appInfo => {
   config.auth = {
     ignore(ctx) {
       // 静态资源目录的访问/public 和post请求不做登录判断
-      return /^\/public/.test(ctx.url) || ctx.method === 'POST';
+      // 考勤列表和视频分享列表不做判断
+      return /^\/(public|attence$|share$)/.test(ctx.url) || ctx.method === 'POST';
     },
   };
 

@@ -5,6 +5,7 @@ module.exports = {
   },
   globals: {
     Vue: true,
+    Noty: true
   },
   rules: {
     'func-names': 'off', // 要求使用命名的 function 表达式
@@ -17,5 +18,6 @@ module.exports = {
     'object-shorthand': 'off', // 要求对象字面量中方法和属性使用简写语法
     'vars-on-top': 'off', // 要求所有的 var 声明出现在它们所在的作用域顶部
     'no-use-before-define': 'off', // 禁止在变量定义之前使用它们
+    'strict': 0, // 禁用框架默认的使用严格模式
   }
 };

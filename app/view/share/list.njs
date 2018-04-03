@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="/public/css/reset.css">
   <link rel="stylesheet" href="/public/css/common.css">
   <link rel="stylesheet" href="/public/css/video.css">
+  <link rel="stylesheet" href="/public/plugin/noty/noty.css">
   <script src="//lib.baomitu.com/jquery/1.12.4/jquery.min.js"></script>
+  <script src="/public/plugin/noty/noty.js"></script>
 </head>
 
 <body>
@@ -27,7 +29,7 @@
             <a href="{{ item.ppt }}" class="ppt-btn col-blue" download>PPT</a>
             <a href="javascript:;" class="video-btn col-blue" data-url="{{ item.address }}">视频</a>
             {% if (user === 'admin') %}
-            <a href="/video/input?videoId={{item._id}}" class="update-btn col-blue">编辑</a>
+            <a href="/share/input?id={{item._id}}" class="update-btn col-blue">编辑</a>
             <a href="javascript:;" class="remove-btn col-blue">删除</a>
             {% endif %}
           </div>
@@ -37,7 +39,7 @@
       </div>
     </div>
     {% if (user === 'admin') %}
-    <a href="/video/input" class="add-btn"><span class="span1"></span><span class="span2"></span></a>
+    <a href="/share/input" class="add-btn"><span class="span1"></span><span class="span2"></span></a>
     {% endif %}
     <div class="black-cover" style="display:none;"></div>
     <div class="fc-box" style="display:none;">

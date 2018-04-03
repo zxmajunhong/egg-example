@@ -15,6 +15,25 @@ class UserService extends Service {
     const user = await this.query('select * from tm_user where user_num=? or user_name=? and user_pwd=?', [ nameOrNum, nameOrNum, pwd ]);
     return user;
   }
+  async getUserByDepartmentId(departmentId) {
+    const user = await this.select('tm_user', {
+      where: { department_id: departmentId },
+      columns: [ 'user_num', 'user_name' ],
+      orders: [[ 'user_num', 'asc' ]],
+    });
+    return user;
+  }
+  /**
+   * 获取用户列表
+   *
+   * @param {any} options 查询配置
+   * @return {any} sqlResult
+   * @memberof UserService
+   */
+  async getUserList(options) {
+    const sqlResult = await this.select('tm_view_user_list', options);
+    return sqlResult;
+  }
 }
 
 module.exports = UserService;

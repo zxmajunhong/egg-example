@@ -32,6 +32,7 @@
       <a href="javascript:" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">切换侧边栏</span>
       </a>
+      <a href="javascipt:void(0)" class="navbar-toggle pull-left show J_refresh">刷新</a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
@@ -78,8 +79,13 @@
               </a>
             </li>
             <li>
-              <a target="main-page" href="/admin/members">
-                <i class="fa fa-users"></i> <span>员工管理</span>
+              <a target="main-page" href="/user">
+                <i class="fa fa-user"></i> <span>员工管理</span>
+              </a>
+            </li>
+            <li>
+              <a target="main-page" href="/department">
+                <i class="fa fa-users"></i> <span>部门管理</span>
               </a>
             </li>
           </ul>
@@ -97,7 +103,7 @@
   }
   </style>
   <div class="content-wrapper">
-    <iframe src="/home" name="main-page" frameborder="0"></iframe>
+    <iframe id="main-page" src="/home" name="main-page" frameborder="0"></iframe>
   </div>
 </div>
 {% endblock %}
@@ -132,6 +138,10 @@
         })
       ]
     }).show();
+  });
+
+  $('.J_refresh').click(function () {
+    document.getElementById('main-page').contentWindow.location.reload(true);
   });
 </script>
 {% endblock %}

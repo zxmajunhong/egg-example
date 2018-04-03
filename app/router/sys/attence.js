@@ -4,16 +4,16 @@
  */
 
 module.exports = app => {
-  const attence = app.controller.sys.attence;
+  const attenceController = app.controller.sys.attence;
   // 考勤列表页面
-  app.router.get('/attence', attence.index);
+  app.router.get('/attence', attenceController.index);
 
   // 考勤设置页面
-  app.router.get('/attence/setting', attence.setting);
+  app.router.get('/attence/setting', attenceController.setting);
 
   // 考勤上传接口
-  app.router.post('/attence/upload', attence.upload);
+  app.router.post('/attence/upload', attenceController.upload);
 
   // 考勤删除指定人员记录
-  app.router.post('/attence/delUserRecord', attence.delRecord);
+  app.router.post('/attence/delUserRecord', attenceController.delRecord);
 };

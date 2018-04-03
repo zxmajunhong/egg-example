@@ -1,9 +1,9 @@
-(function () {
+(function() {
   const vParent = document.querySelector('.video-content');
   const vList = document.querySelectorAll('.video-list .card-box');
   const fc = document.querySelector('.fc-box');
 
-  window.addEventListener('load', function () {
+  window.addEventListener('load', function() {
     cardLocation();
     videoFc();
   }, false);
@@ -19,7 +19,7 @@
     const videoShow = document.querySelectorAll('.video-btn');
     const close = document.querySelector('.fc-box .close');
     const cover = document.querySelector('.black-cover');
-    videoShow.forEach((ele) => {
+    videoShow.forEach(ele => {
       ele.onclick = () => {
         fc.childNodes[3].innerHTML = ele.dataset.url;
         fc.childNodes[3].firstChild.width = 800;
@@ -39,24 +39,39 @@
     fc.style.cssText = 'margin: -' + (fc.offsetHeight / 2) + 'px 0 0 -' + (fc.offsetWidth / 2) + 'px';
   };
 
-  $('.remove-btn').on('click', function () {
+  $('.remove-btn').on('click', function() {
     var $this = $(this);
     var videoId = $this.parents('.card-box').data('id');
     $.ajax({
       type: 'post',
-      url: '/video/remove',
+      url: '/share/remove',
       data: {
-        videoId: videoId
+        id: videoId
       },
-      success: function (data) {
-        $('.fc-msg .msg').html(data.msg);
-        $('black-cover').show();
-        $('.fc-msg').show();
+      success: function(data) {
+        if (data.code === 200) {
+          new Noty({
+            type: 'success',
+            text: data.msg,
+            theme: 'mint',
+            layout: 'topRight',
+            timeout: 2000,
+            callbacks: {
+              afterClose: function() {
+                window.location.reload();
+              }
+            }
+          }).show();
+        } else {
+          new Noty({
+            type: 'error',
+            text: data.msg,
+            theme: 'mint',
+            layout: 'topRight',
+            timeout: 2000
+          }).show();
+        }
       }
     });
-  });
-
-  $('.fc-msg').on('click', '.close', function () {
-    window.location.reload();
   });
 }());

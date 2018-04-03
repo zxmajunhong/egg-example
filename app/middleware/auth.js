@@ -11,6 +11,7 @@ module.exports = () => {
       // 如果存在延长有效期
       ctx.session.save();
       if (ctx.url === '/login') {
+        // 如果是已登录状态进入登录页直接跳转到首页
         return ctx.redirect('/');
       }
       await next();

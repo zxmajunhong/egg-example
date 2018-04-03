@@ -33,13 +33,16 @@
  * @param {number} time 自动关闭时间
  * @param {string} layout 选项 top, topLeft, topCenter, topRight, center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight
  */
-function noty(type, text, time, layout) {
+function noty(type, text, time, layout, afterClose) {
   new Noty({
     type: type,
     text: text,
     theme: 'mint',
     layout: layout || 'topRight',
-    timeout: time || 2000
+    timeout: time || 2000,
+    callbacks: {
+      afterClose: afterClose
+    }
   }).show();
 }
 </script>
